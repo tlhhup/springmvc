@@ -14,6 +14,9 @@
 	
 	<!-- 匹配静态资源：该资源不会通过servlet处理 -->
 	<mvc:resources location="/resources/upload/" mapping="/resources/upload/**"/>
+	
+	<!-- 指定地址映射 -->
+	<mvc:view-controller path="/" view-name="redirect:/UserAction/list"/>
     
 	<!-- 视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
