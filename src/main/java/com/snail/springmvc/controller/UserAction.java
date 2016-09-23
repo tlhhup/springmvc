@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,10 +43,24 @@ public class UserAction {
 		return "user/edit";
 	}
 	
+	@RequestMapping("/addJsonUser")
+	public String addJsonUser(@RequestBody User user){
+		this.userService.saveUserInfo(user);
+		return "redirect:list";
+	}
+	
 	@SuppressWarnings("deprecation")
 	@RequestMapping("/save")
+	/**
+	 * 
+	 * @param user
+	 * @param headPic ：接受上传的文件的 如果是数组 加上[]  参数名称必须和页面的名称一致
+	 * @param request
+	 * @return
+	 */
 	public String save(User user,MultipartFile headPic,HttpServletRequest request){
 		if(headPic!=null){
+			//获取上传文件的原始名称
 			String filename = headPic.getOriginalFilename();
 			//构建文件名
 			filename=UUID.randomUUID().toString()+filename.substring(filename.lastIndexOf("."));

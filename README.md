@@ -13,3 +13,16 @@ springmvc学习_静态资源
 		2. view-name：视图名
 		
 				<mvc:view-controller path="/" view-name="redirect:/UserAction/list"/>
+2. controller的返回值类型
+	1. String：
+		1. 逻辑视图名
+		2. redirect：重定向，语法为："redirect:url地址(包含后缀)"
+		3. forward：页面转发，语法为："forward:url地址(包含后缀)"
+		4. 注意：
+			1. redirect重定向时使用restful风格(地址变量时)需要修改为
+
+					@RequestMapping("/delete/{id}")
+					public String delete(@PathVariable int id){
+						userService.deleteUserInfoById(user.getId());
+						return "redirect:../list";
+					}
